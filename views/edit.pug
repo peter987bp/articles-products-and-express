@@ -1,0 +1,23 @@
+extends ./layout.pug
+
+include ./mixins.pug
+block title
+  title Edit Products
+  h1#header.headerClass Products
+
+  p#content Name: #{products.name}
+  p#content Price: #{products.price}
+  p#content Inventory: #{products.inventory}
+
+  h3#header.headerClass Edit Products
+  form(action=`/products/${products.id}` method='post')
+    input(placeholder = 'Enter Product Id')
+    ='\n'
+    input(placeholder = 'edit name' name='name')
+    ='\n'
+    input(placeholder = 'edit price' name='price')
+    ='\n'
+    input(placeholder = 'edit inventory' name='inventory')
+    input(type="hidden" name="_method" value="PUT")
+    br
+    button(type='submit' name='put' value='submit') Edit Product

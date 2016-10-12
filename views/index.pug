@@ -1,0 +1,12 @@
+extends ./layout.pug
+
+include ./mixins.pug
+block title
+  title Articles and Products
+block body
+  h1#header.headerClass Products
+
+
+  ul.productList
+    +productsList(products)
+
