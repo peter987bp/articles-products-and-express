@@ -1,0 +1,15 @@
+extends ./layout.pug
+
+include ./articleMixins.pug
+block title
+  title Articles
+block body
+  h1#header.headerClass Articles
+
+
+  ul.articleList
+    +articlesList(articles)
+
+  - var url = 'http://localhost:3000/articles/new'
+  a(href=url) Create a new article
+  br

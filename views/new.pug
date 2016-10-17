@@ -5,8 +5,6 @@ block title
   title New Products
   h3#header.headerClass New Products
   form(action=`/products/new` method='post')
-    input(placeholder = 'Enter Product Id')
-    ='\n'
     input(placeholder = 'edit name' name='name')
     ='\n'
     input(placeholder = 'edit price' name='price')
@@ -14,4 +12,4 @@ block title
     input(placeholder = 'edit inventory' name='inventory')
     input(type="hidden" name="_method" value="PUT")
     br
-    button(type='submit' name='put' value='submit') Edit Product
+    button(type='submit' name='put' value='submit') Create new product

@@ -1,0 +1,22 @@
+extends ./layout.pug
+
+include ./articleMixins.pug
+block title
+  title New Articles
+
+  h3#header.headerClass Current Articles
+    ul.articleList
+      +articlesList(articles)
+
+
+  h3#header.headerClass New Articles
+  form(action=`/articles/new` method='post')
+    input(placeholder = 'new title' name='title')
+    ='\n'
+    input(placeholder = 'new body' name='body')
+    ='\n'
+    input(placeholder = 'new author' name='author')
+    input(type="hidden" name="_method" value="PUT")
+    br
+    button(type='submit' name='put' value='submit') Create new Article
+

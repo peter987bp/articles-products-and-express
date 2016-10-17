@@ -1,0 +1,25 @@
+extends ./layout.pug
+
+
+block title
+  title Edit Articles
+  h1#header.headerClass Articles
+
+  p#content Title: #{articles.title}
+  p#content Author: #{articles.author}
+  p#content Body: #{articles.body}
+  p#content urlTitle: #{articles.url_Title}
+
+  h3#header.headerClass Edit Articles
+  form(action=`/articles/${articles.title}/edit` method='post')
+    input(placeholder = 'edit title' name='title')
+    ='\n'
+    input(placeholder = 'edit author' name='author')
+    ='\n'
+    input(placeholder = 'edit body' name='body')
+    ='\n'
+    input(type="hidden" name="_method" value="PUT")
+    input(type="hidden" name="oldtitle" value=`${articles.title}`)
+    br
+    button(type='submit' name='put' value='submit') Edit Article
+    br

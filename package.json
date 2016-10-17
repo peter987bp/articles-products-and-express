@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/peter987bp/articles-products-and-express#readme",
   "dependencies": {
-    "body-parser": "^1.15.2"
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "pg-promise": "^5.3.4"
   }
 }

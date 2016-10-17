@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const PORT = 3000;
 const pug = require('pug');
 const products = require('./routes/products.js');
+const articles = require('./routes/articles.js');
 
 //Set the tempalte engine to use pug
 app.set('view engine', 'pug');
@@ -18,6 +19,7 @@ app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/products', products);
+app.use('/articles', articles);
 
 app.get('/', (req,res) =>{
   //Use res.render to render static HTML file

@@ -1,3 +1,5 @@
+
+
 module.exports = (function(){
   // ... functions declared and private variables?!
   // ...
@@ -15,7 +17,8 @@ module.exports = (function(){
       "price": parseInt(price),
       "inventory": parseInt(inventory),
     };
-    products.push(productCreate);
+    return db.query('INSERT INTO products (id, name, price, inventory VALUES(${id}, ${}, ${author}, ${url_title})', createProduct)
+    .catch
     id += 1;
   }
   //---------Return All Products----------

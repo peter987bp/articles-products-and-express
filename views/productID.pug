@@ -1,0 +1,13 @@
+extends ./layout.pug
+
+include ./mixins.pug
+block title
+  title Product View
+  h1#header.headerClass Products
+
+  p#content Name: #{products.name}
+  p#content Price: #{products.price}
+  p#content Inventory: #{products.inventory}
+
+  - var url = `${products.id}/edit`
+  a(href=url) Edit a product

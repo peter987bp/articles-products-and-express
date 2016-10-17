@@ -1,0 +1,14 @@
+extends ./layout.pug
+
+include ./mixins.pug
+block title
+  title Article View
+  h1#header.headerClass Articles
+
+  p#content Name: #{articles.title}
+  p#content Body: #{articles.body}
+  p#content Author: #{articles.author}
+  p#content url_Title: #{articles.url_Title}
+
+  - var url = `${articles.title}/edit`
+  a(href=url) Edit a Article
