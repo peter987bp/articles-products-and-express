@@ -36,7 +36,7 @@ router.route('/new')
   .post((req,res) =>{
     Articles.createArticle(req.body)
       .then(()=>{
-        res.redirect('http://localhost:3000/articles' );
+        res.redirect('/articles' );
       });
   });
   //WORKS
@@ -56,6 +56,7 @@ router.route('/:title')
 //Route to Articles ID
 router.route('/:title/edit')
   .get((req,res)=>{
+    console.log('req.bodyget: ', req.body);
     Articles.getByTitle(req.params.title)
       .then((article)=>{
        res.render('articlesEdit', {
@@ -63,25 +64,22 @@ router.route('/:title/edit')
       });
     });
   })
+  //WORKS
   .post((req,res) =>{
-    console.log('req.body: ', req.body);
+    console.log('req.bodypost: ', req.body);
     Articles.update(req.body)
       .then((article) =>{
-        console.log('article: ', article);
-         res.redirect(`http://localhost:3000/articles/${req.body.title}`);
+         res.redirect(`/articles/${req.body.title}`);
       });
   })
+
   //NEED delete functionality to work on webpage
   .delete((req,res) =>{
-    if(Articles.delete(req.params.id)){
-      res.json( {
-      success: true
-    });
-    }else{
-      res.json( {
-      success: false
-    });
-    }
+    console.log('req.bodydelete: ', req.body);
+    Articles.delete(req.body)
+      .then((article) =>{
+         res.redirect(`/articles`);
+      });
   });
 
 

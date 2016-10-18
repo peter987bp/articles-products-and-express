@@ -1,5 +1,11 @@
 const db = require('./connection.js');
 
+// //Database table create statement
+// CREATE TABLE products(
+// articles_products_and_express(# id serial PRIMARY KEY,
+// articles_products_and_express(# name text,
+// articles_products_and_express(# price integer,
+// articles_products_and_express(# inventory integer);
 
 module.exports = (function(){
 
@@ -21,6 +27,7 @@ module.exports = (function(){
     });
     console.log('createArticle: ', createArticle);
   }
+  //WORKS
   //---------Return All articles----------
   function _all(){
 
@@ -35,7 +42,6 @@ module.exports = (function(){
 
   //-------UPDATE-------------------
   function _update(data){
-    console.log('data: ', data);
     return db.query('UPDATE articles SET title =${title}, body = ${body},author = ${author} WHERE title =${oldtitle}', data)
      .catch(error =>{
 
@@ -46,7 +52,8 @@ module.exports = (function(){
 
   //-------DELETE-------------------
   function _delete(title) {
-    return db.query('DELETE FROM articles WHERE title = title',title)
+    console.log('title: ', title);
+    return db.query('DELETE FROM articles WHERE title = ${oldtitle}',title)
     .catch(error =>{
 
       console.error('error: ', error);
@@ -59,6 +66,7 @@ module.exports = (function(){
   return db.query('SELECT * FROM articles WHERE title = $1', title)
   .catch(error=>{
     console.error(error);
+    return error;
   });
 }
   return {

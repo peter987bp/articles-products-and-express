@@ -11,15 +11,24 @@ block title
   p#content urlTitle: #{articles.url_Title}
 
   h3#header.headerClass Edit Articles
-  form(action=`/articles/${articles.title}/edit` method='post')
+  form(action=`/articles/${articles.title}/edit` method='POST')
     input(placeholder = 'edit title' name='title')
     ='\n'
     input(placeholder = 'edit author' name='author')
     ='\n'
     input(placeholder = 'edit body' name='body')
     ='\n'
-    input(type="hidden" name="_method" value="PUT")
     input(type="hidden" name="oldtitle" value=`${articles.title}`)
     br
     button(type='submit' name='put' value='submit') Edit Article
+    br
+
+
+  h3#header.headerClass Delete Articles
+  form(action=`/articles/${articles.title}/edit` method='POST')
+    input(placeholder = 'Delete title' name='title')
+    ='\n'
+    input(type="hidden" name="oldtitle" value=`${articles.title}`)
+    input(type="hidden" name="_method" value="DELETE")
+    button(type='submit' name='put' value='submit') Delete Article
     br

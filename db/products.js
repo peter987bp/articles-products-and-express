@@ -1,4 +1,4 @@
-
+const db = require('./connection.js');
 
 module.exports = (function(){
   // ... functions declared and private variables?!
@@ -10,21 +10,26 @@ module.exports = (function(){
 
 
   //helper function to create a product
-  function createProduct (name, price, inventory){
+  function createProduct (products){
+    console.log('productsINcreateproductfnct.: ', products);
     var productCreate ={
-      "id": id,
-      "name": name,
-      "price": parseInt(price),
-      "inventory": parseInt(inventory),
+      "name": products.name,
+      "price": parseFloat(products.price),
+      "inventory": parseFloat(products.inventory),
     };
-    return db.query('INSERT INTO products (id, name, price, inventory VALUES(${id}, ${}, ${author}, ${url_title})', createProduct)
-    .catch
-    id += 1;
+    return db.query('INSERT INTO products (name, price, inventory) VALUES( ${name}, ${price}, ${inventory})', productCreate)
+    .catch(error =>{
+      console.error('error: ', error);
+    });
+    console.log('createProduct: ', createProduct);
   }
   //---------Return All Products----------
   function _all(){
+    return db.query('SELECT * FROM products')
 
-    return products;
+    .catch(error =>{
+      console.error('error: ', error);
+    });
   }
 
   //this function adds all items to the array product
@@ -39,48 +44,40 @@ module.exports = (function(){
     }else{
       return false;
     }
-    console.log('productsDB: ', products);
   }
 
   //-------UPDATE-------------------
-  function _update(id, name, price, inventory){
-    for(var x= 0; x<products.length; x++){
-      if(products[x].id === parseInt(id)){
-        console.log('products[x]: ', products[x]);
-        products[x].name = name;
-        products[x].price = price;
-        products[x].inventory = inventory;
-        console.log('aftermutation: ', products[x]);
-        return true;
-      }
-    }
+  function _update(data){
+    console.log('data: ', data);
+    return db.query('UPDATE products SET name =${name}, price = ${price},inventory = ${inventory} WHERE name =${oldname}', data)
+    .catch(error =>{
+
+      console.error('error: ', error);
+       return error;
+    });
   }
 
   //-------DELETE-------------------
   function _delete(id) {
-    for(var x= 0; x<products.length; x++){
-      if(products[x].id === parseInt(id)){
-      var indexOfSplice = products.indexOf(products[x]);
-      products.splice(indexOfSplice,1);
-      return true;
-      }else{
-      return false;
-      }
-    }
+    console.log('id: ', id);
+    return db.query('DELETE FROM products WHERE id =$1', id)
+    .catch(error =>{
+      console.error('error: ', error);
+       return error;
+    });
   }
 
   //-------GET BY ID-------------------
   function _getById (id){
-    for(var x= 0; x<products.length; x++){
-      if(products[x].id === parseInt(id)){
-        return products[x];
-      }
-    }
+    return db.query('SELECT * FROM products WHERE id = $1', id)
+    .catch(error=>{
+      console.error(error);
+    });
   }
 
   return {
     all: _all,
-    add: _add,
+    createProduct: createProduct,
     update: _update,
     delete: _delete,
     getById: _getById,
